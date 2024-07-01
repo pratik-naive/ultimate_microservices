@@ -6,11 +6,10 @@ pipeline {
             steps {
                 script {
                     dir('src') {
-
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t vikashashoke/cartservice:latest ."
-                    }
+                        withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/']) {
+                            sh "docker build -t vikashashoke/cartservice:latest ."
                         }
+                    }
                 }
             }
         }
@@ -18,8 +17,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push vikashashoke/cartservice:latest "
+                    withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/']) {
+                        sh "docker push vikashashoke/cartservice:latest"
                     }
                 }
             }
