@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     dir('src') {
-                        withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/']) {
+                        withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/r/vikashashoke/cartservice']) {
                             sh "docker build -t vikashashoke/cartservice:latest ."
                         }
                     }
@@ -17,7 +17,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/']) {
+                    withDockerRegistry([credentialsId: 'docker-cred', url: 'https://hub.docker.com/r/vikashashoke/cartservice']) {
                         sh "docker push vikashashoke/cartservice:latest"
                     }
                 }
